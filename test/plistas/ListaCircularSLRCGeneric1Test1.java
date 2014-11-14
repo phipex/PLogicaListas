@@ -5,9 +5,9 @@
  */
 package plistas;
 
-import com.udea.listaligada.doble.SLNode;
-import com.udea.listaligada.doble.ExcepcionListaVacia;
-import com.udea.listaligada.doble.ListaCircularSLRCGeneric;
+import com.udea.listaligada.simple.SLNode;
+import com.udea.listaligada.simple.ExcepcionListaVacia;
+import com.udea.listaligada.simple.ListaCircularSLRCGeneric;
 import java.util.Iterator;
 import java.util.ListIterator;
 import org.junit.After;

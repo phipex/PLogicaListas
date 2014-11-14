@@ -111,9 +111,15 @@ public class ListaCircularSLRCGeneric<T> {
         SLNode<T> res = null;
 
         if (elementoAInsertar != null) {
-            
+            SLNode<T> proximo = null;
+            if(anterior == null){
+                proximo = registroCabeza;
+                anterior = registroCabeza;
+            }else{
+                proximo = anterior.getNodoProximo();
+            }
 
-            SLNode<T> proximo = anterior.getNodoProximo();
+            
             SLNode<T> nuevoNodo = new SLNode<>(elementoAInsertar, proximo);
             anterior.setNodoProximo(nuevoNodo);
 
@@ -559,11 +565,11 @@ public class ListaCircularSLRCGeneric<T> {
                 
 
                 SLNode<T> listanododesde = lista.getElemento(0);
-
+                SLNode<T> finallista = lista.ultimo();
                 int indice = desde;
                 int indicelista = 0;
                 boolean anterior = false;
-                while (thisnododesde.getNodoProximo() != registroCabeza) {
+                while ((thisnododesde.getNodoProximo() != registroCabeza) && (listanododesde != finallista )) {
 
                     //si los datos son iguales
                     T objectList = listanododesde.getDato();
@@ -819,7 +825,7 @@ public class ListaCircularSLRCGeneric<T> {
         ListIterator<T> iterator = null;
 
         SLNode<T> primerNodo = registroCabeza.getNodoProximo();
-        if (primerNodo != null) {
+        if (primerNodo != registroCabeza) {
             //iterator = new DoublyLinkedListIterator(primerNodo,tamanyo);
             iterator = new SimpleLinkedListCircularRCIterator<T>(primerNodo,  this);
         }
@@ -845,6 +851,10 @@ public class ListaCircularSLRCGeneric<T> {
         return iterator;
     }
 
+    /**
+     * Retorna el ultimo elemento de la lista o null si la lista es vacia
+     * @return 
+     */
     public SLNode<T> ultimo(){
     
         SLNode<T> ultimo = null;
@@ -862,6 +872,12 @@ public class ListaCircularSLRCGeneric<T> {
         
     }
     
+    /**
+     * Retorna el registro anterior al ingresado por el parametro, si el
+     * nodo no pertenece a la lista retorna null
+     * @param actual
+     * @return 
+     */
     public SLNode<T> anterior(SLNode<T> actual){
     
         SLNode<T> anterior = null;
@@ -878,6 +894,10 @@ public class ListaCircularSLRCGeneric<T> {
                 temp= temp.getNodoProximo();
                 
             }
+            
+            if(temp == registroCabeza){
+                anterior = null;
+            }
         }
         
         return anterior;
@@ -885,6 +905,24 @@ public class ListaCircularSLRCGeneric<T> {
     }
     
     
+    public SLNode<T> remover(){
+    
+         SLNode<T> ultimo = null;
+        
+        if (!estaVacio()) {
+            SLNode<T> anterior = registroCabeza;
+            ultimo = registroCabeza.getNodoProximo();
+            while (ultimo.getNodoProximo() != registroCabeza) {
+                anterior = ultimo;
+                ultimo = ultimo.getNodoProximo();
+            }
+            anterior.setNodoProximo(ultimo.getNodoProximo());
+            
+        }
+        
+        return ultimo;
+        
+    }
 //    
 //    public static void main(String args[]) {
 //        ListaCircularDLGeneric<Character> lista = crearListaString("por un caminito");

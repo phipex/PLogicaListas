@@ -5,9 +5,9 @@
  */
 package com.udea.texto;
 
-import com.udea.listaligada.doble.SLNode;
+import com.udea.listaligada.simple.SLNode;
 import java.util.Iterator;
-import com.udea.listaligada.doble.ListaCircularSLRCGeneric;
+import com.udea.listaligada.simple.ListaCircularSLRCGeneric;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;

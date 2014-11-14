@@ -377,6 +377,8 @@ public class ListaCircularSLRCGeneric<T> {
         remover(getElemento(posicion));
     }
     
+   
+    
     /**
      * Remueve la serie de datos entre las posiciones ingresadas
      * @param inicia posicion desde que se debe remover datos
