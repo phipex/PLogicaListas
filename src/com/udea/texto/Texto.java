@@ -5,7 +5,7 @@
  */
 package com.udea.texto;
 
-import com.udea.listaligada.doble.DLNode;
+import com.udea.listaligada.doble.SLNode;
 import java.util.Iterator;
 import com.udea.listaligada.doble.ListaCircularDLGeneric;
 import java.util.ArrayList;
@@ -417,7 +417,7 @@ public class Texto {
                 
                 this.texto.remover(posicion, posicion + texto.getCaracteres());
                 
-                DLNode<Character> actual = this.texto.getElemento(posicion-1);
+                SLNode<Character> actual = this.texto.getElemento(posicion-1);
                 
                 for (Iterator it = texto.getTexto().iterator(); it.hasNext();) {
                      Character object = (Character)it.next();
@@ -462,7 +462,7 @@ public class Texto {
     public boolean ingresarSubHilera(Texto subhilera,int posicion){
         boolean res = false;
         
-        DLNode<Character> actual = texto.getElemento(posicion);
+        SLNode<Character> actual = texto.getElemento(posicion);
         if (posicion > -1 && posicion < getCaracteres()) {
             for (Iterator it = subhilera.getTexto().iterator(); it.hasNext();) {
                 

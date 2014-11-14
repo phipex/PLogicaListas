@@ -14,7 +14,7 @@ import java.util.ListIterator;
  */
 public class ListaCircularDLGeneric1<T> {
 
-    private DLNode<T> primerNodo;
+    private SLNode<T> primerNodo;
     private String nombre;
 
     private int tamanyo;        // number of elements on list
@@ -37,8 +37,8 @@ public class ListaCircularDLGeneric1<T> {
         return tamanyo;
     }
 
-    public synchronized DLNode<T> insertarInicio(T elementoAInsertar) {
-        DLNode<T> res = null;
+    public synchronized SLNode<T> insertarInicio(T elementoAInsertar) {
+        SLNode<T> res = null;
 
         res = insertarFinal(elementoAInsertar);
 
@@ -49,10 +49,10 @@ public class ListaCircularDLGeneric1<T> {
         return res;
     }
 
-    public synchronized DLNode<T> insertarFinal(T elementoAInsertar) {
-        DLNode<T> res = null;
+    public synchronized SLNode<T> insertarFinal(T elementoAInsertar) {
+        SLNode<T> res = null;
 
-        DLNode<T> anterior = null;
+        SLNode<T> anterior = null;
         if (primerNodo != null) {//es vacio
 
             anterior = primerNodo.getNodoAnterior();
@@ -74,12 +74,12 @@ public class ListaCircularDLGeneric1<T> {
      * @return Nuevo nodo
      *
      */
-    public synchronized DLNode<T> insertar(DLNode<T> anterior, T elementoAInsertar) {
-        DLNode<T> res = null;
+    public synchronized SLNode<T> insertar(SLNode<T> anterior, T elementoAInsertar) {
+        SLNode<T> res = null;
 
         if (elementoAInsertar != null) {
             if (estaVacio()) {
-                primerNodo = new DLNode<T>(elementoAInsertar);
+                primerNodo = new SLNode<T>(elementoAInsertar);
                 primerNodo.setNodoProximo(primerNodo);
                 primerNodo.setNodoAnterior(primerNodo);
 
@@ -87,8 +87,8 @@ public class ListaCircularDLGeneric1<T> {
 
             } else if (anterior != null) {
 
-                DLNode<T> proximo = anterior.getNodoProximo();
-                DLNode<T> nuevoNodo = new DLNode<>(elementoAInsertar, proximo, anterior);
+                SLNode<T> proximo = anterior.getNodoProximo();
+                SLNode<T> nuevoNodo = new SLNode<>(elementoAInsertar, proximo, anterior);
                 anterior.setNodoProximo(nuevoNodo);
 
                 proximo.setNodoAnterior(nuevoNodo);
@@ -112,10 +112,10 @@ public class ListaCircularDLGeneric1<T> {
      * @return true en caso de que exista o falso en el caso contrario
      * @deprecated
      */
-    public synchronized boolean contieneNodo(DLNode<T> nodo) {
+    public synchronized boolean contieneNodo(SLNode<T> nodo) {
         boolean res = false;
         if (!estaVacio()) {
-            DLNode<T> actual = primerNodo;
+            SLNode<T> actual = primerNodo;
             while (actual.getNodoProximo() != primerNodo) {
                 if (actual.equals(nodo)) {
                     res = true;
@@ -135,10 +135,10 @@ public class ListaCircularDLGeneric1<T> {
      * @param desde
      * @return
      */
-    public synchronized boolean contieneNodo(DLNode<T> nodo, DLNode<T> desde) {
+    public synchronized boolean contieneNodo(SLNode<T> nodo, SLNode<T> desde) {
         boolean res = false;
         if (!estaVacio()) {
-            DLNode<T> actual = desde;
+            SLNode<T> actual = desde;
             while (actual.getNodoProximo() != primerNodo) {
                 if (actual.equals(nodo)) {
                     res = true;
@@ -151,11 +151,11 @@ public class ListaCircularDLGeneric1<T> {
         return res;
     }
 
-    public synchronized DLNode<T> contieneDato(T dato, int posicion){
+    public synchronized SLNode<T> contieneDato(T dato, int posicion){
         
-        DLNode<T> res = null;
+        SLNode<T> res = null;
 
-        DLNode<T> desde = null;
+        SLNode<T> desde = null;
 
         if (!estaVacio()) {
             desde = getElemento(posicion);
@@ -168,10 +168,10 @@ public class ListaCircularDLGeneric1<T> {
         
     }
     
-    public synchronized DLNode<T> contienDato(T dato) {
-        DLNode<T> res = null;
+    public synchronized SLNode<T> contienDato(T dato) {
+        SLNode<T> res = null;
 
-        DLNode<T> desde = null;
+        SLNode<T> desde = null;
 
         if (!estaVacio()) {
             desde = primerNodo;
@@ -190,10 +190,10 @@ public class ListaCircularDLGeneric1<T> {
      * la apresente lista)
      * @return nodo que contiene el dato o null en caso de no encontrarlo
      */
-    public synchronized DLNode<T> contienDato(T dato, DLNode<T> desde) {
-        DLNode<T> res = null;
+    public synchronized SLNode<T> contienDato(T dato, SLNode<T> desde) {
+        SLNode<T> res = null;
         if (!estaVacio() && desde != null) {
-            DLNode<T> actual = desde;
+            SLNode<T> actual = desde;
             while (actual.getNodoProximo() != primerNodo) {
                 if (actual.getDato().equals(dato)) {
                     res = actual;
@@ -218,7 +218,7 @@ public class ListaCircularDLGeneric1<T> {
         int res = -1;
 
         if (!estaVacio()) {
-            DLNode<T> actual = primerNodo;
+            SLNode<T> actual = primerNodo;
             int indice = 0;
             while (actual.getNodoProximo() != primerNodo) {
 
@@ -247,7 +247,7 @@ public class ListaCircularDLGeneric1<T> {
 
         if (posicion >= 0 && posicion < tamanyo) {
             if (!estaVacio()) {
-                DLNode<T> actual = primerNodo;
+                SLNode<T> actual = primerNodo;
                 int indice = 0;
                 while (actual.getNodoProximo() != primerNodo) {
 
@@ -273,9 +273,9 @@ public class ListaCircularDLGeneric1<T> {
      * @param posicion posicion en al que se reemplazara el dato
      * @return El nodo con el dato cambiado
      */
-    public synchronized DLNode<T> reemplazaPosicio(T data, int posicion) {
+    public synchronized SLNode<T> reemplazaPosicio(T data, int posicion) {
 
-        DLNode<T> res = null;
+        SLNode<T> res = null;
 
         res = getElemento(posicion);
         if (res != null) {
@@ -296,7 +296,7 @@ public class ListaCircularDLGeneric1<T> {
      */
     public synchronized T remover()
             throws ExcepcionListaVacia {
-        DLNode NodoARemover = primerNodo;
+        SLNode NodoARemover = primerNodo;
         T elementoARemover = null;
 
         if (estaVacio()) {
@@ -308,11 +308,11 @@ public class ListaCircularDLGeneric1<T> {
         if (primerNodo == primerNodo.getNodoProximo()) {
             primerNodo = null;
         } else {
-            DLNode<T> actual = primerNodo;
+            SLNode<T> actual = primerNodo;
             while (actual.getNodoProximo() != primerNodo) {
                 actual = actual.getNodoProximo();
             }
-            DLNode<T> ultimoNodo = actual;
+            SLNode<T> ultimoNodo = actual;
 
             primerNodo = primerNodo.getNodoProximo();
             ultimoNodo.setNodoProximo(primerNodo);
@@ -338,7 +338,7 @@ public class ListaCircularDLGeneric1<T> {
      * @param nodoARemover
      * @throws ExcepcionListaVacia
      */
-    public synchronized void remover(DLNode nodoARemover) throws ExcepcionListaVacia {
+    public synchronized void remover(SLNode nodoARemover) throws ExcepcionListaVacia {
 
         if (estaVacio()) {
             throw new ExcepcionListaVacia(nombre);
@@ -347,8 +347,8 @@ public class ListaCircularDLGeneric1<T> {
         if (primerNodo == nodoARemover) {
             primerNodo = nodoARemover.getNodoProximo();
         } else if (nodoARemover != null) {
-            DLNode<T> anterior = nodoARemover.getNodoAnterior();
-            DLNode<T> proximo = nodoARemover.getNodoProximo();
+            SLNode<T> anterior = nodoARemover.getNodoAnterior();
+            SLNode<T> proximo = nodoARemover.getNodoProximo();
             anterior.setNodoProximo(proximo);
             proximo.setNodoAnterior(anterior);
 
@@ -450,9 +450,9 @@ public class ListaCircularDLGeneric1<T> {
         if (lista != null && !estaVacio() && !lista.estaVacio()) {
 
             if (lista.tamanyo() <= tamanyo) {
-                DLNode<T> thisnododesde = getElemento(desde);
+                SLNode<T> thisnododesde = getElemento(desde);
 
-                DLNode<T> listanododesde = lista.primerNodo;
+                SLNode<T> listanododesde = lista.primerNodo;
 
                 int indice = desde;
                 int indicelista = 0;
@@ -508,7 +508,7 @@ public class ListaCircularDLGeneric1<T> {
             
             res = new ListaCircularDLGeneric1<T>();
 
-            DLNode<T> thisnododesde = getElemento(inicia);
+            SLNode<T> thisnododesde = getElemento(inicia);
 
             int indice = inicia;
 
@@ -535,12 +535,12 @@ public class ListaCircularDLGeneric1<T> {
      * @param posicion
      * @return nodo en la posicion establecida o null en caso de no encotrarlo
      */
-    public synchronized DLNode<T> getElemento(int posicion) {
-        DLNode<T> res = null;
+    public synchronized SLNode<T> getElemento(int posicion) {
+        SLNode<T> res = null;
 
         if (!estaVacio() && posicion >= 0 && posicion < tamanyo) {
 
-            DLNode<T> actual = primerNodo;
+            SLNode<T> actual = primerNodo;
             int indicec = 0;
             do {
 
@@ -578,7 +578,7 @@ public class ListaCircularDLGeneric1<T> {
 
         System.out.print("La lista " + nombre + " es: ");
 
-        DLNode<T> actual = primerNodo;
+        SLNode<T> actual = primerNodo;
 
         do {
             System.out.print(actual.getDato().toString() + " ");
@@ -685,7 +685,7 @@ public class ListaCircularDLGeneric1<T> {
         return iterator;
     }
 
-    public ListIterator<T> iterator(DLNode<T> desde) {
+    public ListIterator<T> iterator(SLNode<T> desde) {
 
         ListIterator<T> iterator = null;
 

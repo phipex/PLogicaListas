@@ -5,7 +5,7 @@
  */
 package plistas;
 
-import com.udea.listaligada.doble.DLNode;
+import com.udea.listaligada.doble.SLNode;
 import com.udea.listaligada.doble.ExcepcionListaVacia;
 import com.udea.listaligada.doble.ListaCircularDLGeneric;
 import java.util.Iterator;
@@ -78,8 +78,8 @@ public class ListaCircularDLGeneric1Test {
         System.out.println("insertarInicio");
         Object elementoAInsertar = null;
         ListaCircularDLGeneric instance = new ListaCircularDLGeneric();
-        DLNode expResult = null;
-        DLNode result = instance.insertarInicio(elementoAInsertar);
+        SLNode expResult = null;
+        SLNode result = instance.insertarInicio(elementoAInsertar);
         assertEquals(expResult, result);
         
     }
@@ -94,8 +94,8 @@ public class ListaCircularDLGeneric1Test {
         System.out.println("insertarFinal");
         Object elementoAInsertar = null;
         ListaCircularDLGeneric instance = new ListaCircularDLGeneric();
-        DLNode expResult = null;
-        DLNode result = instance.insertarFinal(elementoAInsertar);
+        SLNode expResult = null;
+        SLNode result = instance.insertarFinal(elementoAInsertar);
         assertEquals(expResult, result);
         
     }
@@ -109,9 +109,9 @@ public class ListaCircularDLGeneric1Test {
     public void testInsertar() {
         System.out.println("insertar");
         ListaCircularDLGeneric instance = new ListaCircularDLGeneric();
-        DLNode expResult = null;
-        DLNode param = null;
-        DLNode result = instance.insertar(param,null);
+        SLNode expResult = null;
+        SLNode param = null;
+        SLNode result = instance.insertar(param,null);
         assertEquals(expResult, result);
         
     }
@@ -156,8 +156,8 @@ public class ListaCircularDLGeneric1Test {
         System.out.println("contienDato");
         Object dato = null;
         ListaCircularDLGeneric instance = new ListaCircularDLGeneric();
-        DLNode expResult = null;
-        DLNode result = instance.contienDato(dato);
+        SLNode expResult = null;
+        SLNode result = instance.contienDato(dato);
         assertEquals(expResult, result);
         
     }
@@ -169,8 +169,8 @@ public class ListaCircularDLGeneric1Test {
     public void testContienDato_GenericType_DLNode() {
         System.out.println("contienDato");
         ListaCircularDLGeneric instance = new ListaCircularDLGeneric();
-        DLNode expResult = null;
-        DLNode result = instance.contienDato(null);
+        SLNode expResult = null;
+        SLNode result = instance.contienDato(null);
         assertEquals(expResult, result);
         
     }
@@ -250,8 +250,8 @@ public class ListaCircularDLGeneric1Test {
         Object data = null;
         int posicion = 0;
         ListaCircularDLGeneric instance = new ListaCircularDLGeneric();
-        DLNode expResult = null;
-        DLNode result = instance.reemplazaPosicio(data, posicion);
+        SLNode expResult = null;
+        SLNode result = instance.reemplazaPosicio(data, posicion);
         assertEquals(expResult, result);
         
     }
@@ -267,7 +267,7 @@ public class ListaCircularDLGeneric1Test {
         int posicion = 0;
         ListaCircularDLGeneric<Character> instance = crearListaString("pollito");
        
-        DLNode result = instance.reemplazaPosicio('a', posicion);
+        SLNode result = instance.reemplazaPosicio('a', posicion);
 //        assertNotNull(result);
         System.out.println(">>>>"+instance.toString(false));
         assertEquals(instance.toString(false),data);
@@ -319,7 +319,7 @@ public class ListaCircularDLGeneric1Test {
     @Test
     public void testRemover_DLNode() {
         System.out.println("remover");
-        DLNode nodoARemover = null;
+        SLNode nodoARemover = null;
         ListaCircularDLGeneric instance = new ListaCircularDLGeneric();
         try {
             instance.remover(nodoARemover);
@@ -335,7 +335,7 @@ public class ListaCircularDLGeneric1Test {
     public void testRemover_DLNode2() {
         try {
             System.out.println("remover");
-            DLNode nodoARemover = null;
+            SLNode nodoARemover = null;
             ListaCircularDLGeneric instance = new ListaCircularDLGeneric();
             instance.remover(nodoARemover);
             // review the generated test code and remove the default call to fail.
@@ -527,8 +527,8 @@ public class ListaCircularDLGeneric1Test {
         System.out.println("getElemento");
         int posicion = 0;
         ListaCircularDLGeneric instance = new ListaCircularDLGeneric();
-        DLNode expResult = null;
-        DLNode result = instance.getElemento(posicion);
+        SLNode expResult = null;
+        SLNode result = instance.getElemento(posicion);
         assertEquals(expResult, result);
         
     }
@@ -541,8 +541,8 @@ public class ListaCircularDLGeneric1Test {
         System.out.println("getElemento");
         int posicion = -1;
         ListaCircularDLGeneric instance = new ListaCircularDLGeneric();
-        DLNode expResult = null;
-        DLNode result = instance.getElemento(posicion);
+        SLNode expResult = null;
+        SLNode result = instance.getElemento(posicion);
         assertEquals(expResult, result);
         // review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
@@ -735,8 +735,8 @@ public class ListaCircularDLGeneric1Test {
         System.out.println("insertar");
         Object elementoAInsertar = null;
         ListaCircularDLGeneric instance = new ListaCircularDLGeneric();
-        DLNode expResult = null;
-        DLNode result = instance.insertarInicio(elementoAInsertar);
+        SLNode expResult = null;
+        SLNode result = instance.insertarInicio(elementoAInsertar);
         assertEquals(expResult, result);
         // review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
@@ -749,8 +749,8 @@ public class ListaCircularDLGeneric1Test {
     public void testInsertarFinal_DLNode_GenericType() {
         System.out.println("insertar");
         ListaCircularDLGeneric instance = new ListaCircularDLGeneric();
-        DLNode expResult = null;
-        DLNode result = instance.insertarFinal(null);
+        SLNode expResult = null;
+        SLNode result = instance.insertarFinal(null);
         assertEquals(expResult, result);
         //review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
@@ -765,8 +765,8 @@ public class ListaCircularDLGeneric1Test {
     public void testInsertarInicio_DLNode_GenericType() {
         System.out.println("insertar");
         ListaCircularDLGeneric instance = new ListaCircularDLGeneric();
-        DLNode expResult = null;
-        DLNode result = instance.insertarInicio(null);
+        SLNode expResult = null;
+        SLNode result = instance.insertarInicio(null);
         assertEquals(expResult, result);
         //review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
@@ -783,8 +783,8 @@ public class ListaCircularDLGeneric1Test {
     public void testContienDato() {
         System.out.println("contienDato");
         ListaCircularDLGeneric<Integer> instance = new ListaCircularDLGeneric<>();
-        DLNode<Integer> expResult = null;
-        DLNode<Integer> result = instance.contienDato(null,null);
+        SLNode<Integer> expResult = null;
+        SLNode<Integer> result = instance.contienDato(null,null);
         assertEquals(expResult, result);
         //review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
@@ -798,7 +798,7 @@ public class ListaCircularDLGeneric1Test {
         System.out.println("contienDato");
         ListaCircularDLGeneric<Character> instance = crearListaString("pollito");
        
-        DLNode<Character> result = instance.contienDato('i');
+        SLNode<Character> result = instance.contienDato('i');
         assertNotNull(result);
         // review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");

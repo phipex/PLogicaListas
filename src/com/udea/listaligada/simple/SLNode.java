@@ -3,7 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.udea.listaligada.doble;
+package com.udea.listaligada.simple;
+
 
 import java.util.Objects;
 
@@ -11,7 +12,7 @@ import java.util.Objects;
  *  Clase que representa un nodo  con liga doble que admite datos genericos
  * @author Andres Felipe Montoya
  */
-public class DLNode<T> {
+public class SLNode<T> {
     
     /**
      * Dato del nodo
@@ -21,19 +22,16 @@ public class DLNode<T> {
     /**
      * Proximo nodo (derecha)
      */
-    private DLNode<T> nodoProximo;
+    private SLNode<T> nodoProximo;
     
-    /**
-     * Anterior nodo (izquierda)
-     */
-    private DLNode<T> nodoAnterior;
+    
     
     /**
      * Constructor con los valores nulos
      */
-    DLNode(){
+    SLNode(){
         nodoProximo=null;
-        nodoAnterior=null;
+        
         dato=null;
     }
     
@@ -41,8 +39,8 @@ public class DLNode<T> {
      * Contrusctor con el valor y los nodo nulos
      * @param data Parametro generico que representa el dato en la lista
      */
-    DLNode(T data) {
-        this(data, null, null);
+    SLNode(T data) {
+        this(data, null);
     }
     
     /**
@@ -51,10 +49,10 @@ public class DLNode<T> {
      * @param next proximo dato
      * @param prev anterior dato
      */
-    DLNode(T data, DLNode<T> next, DLNode<T> prev) {
+    SLNode(T data, SLNode<T> next) {
         this.dato = data;
         this.nodoProximo = next;
-        this.nodoAnterior = prev;
+        
     }
 
     public T getDato() {
@@ -65,28 +63,19 @@ public class DLNode<T> {
         this.dato = dato;
     }
 
-    public DLNode<T> getNodoProximo() {
+    public SLNode<T> getNodoProximo() {
         return nodoProximo;
     }
 
-    public void setNodoProximo(DLNode<T> nodoProximo) {
+    public void setNodoProximo(SLNode<T> nodoProximo) {
         this.nodoProximo = nodoProximo;
-    }
-
-    public DLNode<T> getNodoAnterior() {
-        return nodoAnterior;
-    }
-
-    public void setNodoAnterior(DLNode<T> nodoAnterior) {
-        this.nodoAnterior = nodoAnterior;
     }
 
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 37 * hash + Objects.hashCode(this.dato);
-        hash = 37 * hash + Objects.hashCode(this.nodoProximo);
-        hash = 37 * hash + Objects.hashCode(this.nodoAnterior);
+        hash = 59 * hash + Objects.hashCode(this.dato);
+        hash = 59 * hash + Objects.hashCode(this.nodoProximo);
         return hash;
     }
 
@@ -98,27 +87,19 @@ public class DLNode<T> {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final DLNode<T> other = (DLNode<T>) obj;
+        final SLNode<?> other = (SLNode<?>) obj;
         if (!Objects.equals(this.dato, other.dato)) {
             return false;
         }
         if (!Objects.equals(this.nodoProximo, other.nodoProximo)) {
             return false;
         }
-        if (!Objects.equals(this.nodoAnterior, other.nodoAnterior)) {
-            return false;
-        }
         return true;
     }
 
-    @Override
-    public String toString() {
-        if (dato != null && nodoAnterior != null && nodoProximo != null) {
-            return "DLNode{" + "dato=" + dato + ", nodoProximo=" + nodoProximo + ", nodoAnterior=" + nodoAnterior + '}';
-        } else {
-            return "DLNode{ Nodo Vacio )";
-        }
-    }
+    
+
+    
 
    
 }

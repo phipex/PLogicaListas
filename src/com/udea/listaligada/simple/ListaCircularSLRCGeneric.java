@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.udea.listaligada.doble;
+package com.udea.listaligada.simple;
 
+import com.udea.listaligada.doble.*;
 import java.util.Iterator;
 import java.util.ListIterator;
 
@@ -13,7 +14,7 @@ import java.util.ListIterator;
  * en la que sus datos son campos genericos
  * @author Andres Felipe Montoya
  */
-public class ListaCircularDLGeneric<T> {
+public class ListaCircularSLRCGeneric<T> {
 
     /**
      * Primer nodo de la lista
@@ -35,7 +36,7 @@ public class ListaCircularDLGeneric<T> {
      * Constructor de la clase
      * @param cadena nombre de la lista
      */
-    public ListaCircularDLGeneric(String cadena) {
+    public ListaCircularSLRCGeneric(String cadena) {
         nombre = cadena;
         primerNodo = null;
     }
@@ -43,7 +44,7 @@ public class ListaCircularDLGeneric<T> {
     /**
      * Constructor de la clase con nombre generico
      */
-    public ListaCircularDLGeneric() {
+    public ListaCircularSLRCGeneric() {
         this("Circular DE");
     }
 
@@ -459,7 +460,7 @@ public class ListaCircularDLGeneric<T> {
      * @param lista
      * @return si se logro ingresar a la lista
      */
-    public synchronized boolean ingresaLista(ListaCircularDLGeneric lista) {
+    public synchronized boolean ingresaLista(ListaCircularSLRCGeneric lista) {
         boolean res = false;
 
         if (lista != null) {
@@ -482,7 +483,7 @@ public class ListaCircularDLGeneric<T> {
      * @param posicion posicion desde la que se va a reemplazar
      * @return verdadero si se logro reemplazar
      */
-    public synchronized boolean reemplazaLista(ListaCircularDLGeneric lista, int posicion) {
+    public synchronized boolean reemplazaLista(ListaCircularSLRCGeneric lista, int posicion) {
 
         boolean res = false;
 
@@ -522,7 +523,7 @@ public class ListaCircularDLGeneric<T> {
      * @return retorna la posicion donde se encuentra la sublista o -1 en caso
      * contrario
      */
-    public synchronized int encontrasLista(ListaCircularDLGeneric<T> lista) {
+    public synchronized int encontrasLista(ListaCircularSLRCGeneric<T> lista) {
         return encontrasLista(lista, 0);
     }
 
@@ -536,7 +537,7 @@ public class ListaCircularDLGeneric<T> {
      * @param desde posicion desde la que se va a buscar
      * @return
      */
-    public synchronized int encontrasLista(ListaCircularDLGeneric<T> lista, int desde) {
+    public synchronized int encontrasLista(ListaCircularSLRCGeneric<T> lista, int desde) {
 
         int res = -1;
 
@@ -654,8 +655,8 @@ public class ListaCircularDLGeneric<T> {
      * @return una nueva lista con los datos encontrados
      * @deprecated reemplazada por subHilera
      */
-    public synchronized ListaCircularDLGeneric<T> sublista(int inicia, int finaliza) {
-        ListaCircularDLGeneric<T> res = null;
+    public synchronized ListaCircularSLRCGeneric<T> sublista(int inicia, int finaliza) {
+        ListaCircularSLRCGeneric<T> res = null;
 
         if (!this.estaVacio() && inicia > -1 && finaliza > -1 && finaliza < tamanyo) {
 
@@ -669,7 +670,7 @@ public class ListaCircularDLGeneric<T> {
             }
             
             
-            res = new ListaCircularDLGeneric<T>();
+            res = new ListaCircularSLRCGeneric<T>();
 
             SLNode<T> thisnododesde = getElemento(inicia);
 
@@ -700,9 +701,9 @@ public class ListaCircularDLGeneric<T> {
      * @param hasta posicion hasta la que se debe buscar la sublista
      * @return una nueva lista con los datos encontrados
      */
-    public synchronized ListaCircularDLGeneric<T> subHilera(int desde, int hasta){
+    public synchronized ListaCircularSLRCGeneric<T> subHilera(int desde, int hasta){
         
-        ListaCircularDLGeneric<T> lista = null;
+        ListaCircularSLRCGeneric<T> lista = null;
         
         if (!estaVacio() && desde > -1 && hasta > -1) {
             if (hasta < desde) {
@@ -711,7 +712,7 @@ public class ListaCircularDLGeneric<T> {
                 desde = temp;
             }
             
-            lista = new ListaCircularDLGeneric<T>(this.nombre);
+            lista = new ListaCircularSLRCGeneric<T>(this.nombre);
             
             int index = desde;
             
@@ -789,7 +790,7 @@ public class ListaCircularDLGeneric<T> {
 
         if (!estaVacio() && desde > -1) {
             //iterator = new DoublyLinkedListIterator(primerNodo,tamanyo);
-            iterator = new DoubleLinkedListCircularIterator<T>(getElemento(desde), this);
+            iterator = new SimpleLinkedListCircularRCIterator<T>(getElemento(desde), this);
         }
 
         return iterator;
@@ -805,7 +806,7 @@ public class ListaCircularDLGeneric<T> {
 
         if (primerNodo != null) {
             //iterator = new DoublyLinkedListIterator(primerNodo,tamanyo);
-            iterator = new DoubleLinkedListCircularIterator<T>(primerNodo,  this);
+            iterator = new SimpleLinkedListCircularRCIterator<T>(primerNodo,  this);
         }
 
         return iterator;
@@ -822,7 +823,7 @@ public class ListaCircularDLGeneric<T> {
 
         if (desde != null) {
             //iterator = new DoublyLinkedListIterator(desde, tamanyo);
-            iterator = new DoubleLinkedListCircularIterator<T>(desde,  this);
+            iterator = new SimpleLinkedListCircularRCIterator<T>(desde,  this);
         }
 
         return iterator;

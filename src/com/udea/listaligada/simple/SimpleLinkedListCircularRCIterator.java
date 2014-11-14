@@ -1,6 +1,7 @@
 
-package com.udea.listaligada.doble;
+package com.udea.listaligada.simple;
 
+import com.udea.listaligada.doble.*;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
@@ -9,7 +10,7 @@ import java.util.NoSuchElementException;
  * doblemente ligadas circulares
  * @author Andres Felipe Montoya
  */
-public class DoubleLinkedListCircularIterator<T>  implements ListIterator<T>{
+public class SimpleLinkedListCircularRCIterator<T>  implements ListIterator<T>{
           
        //TODO convertir para crear una version reversa segun parametro
         
@@ -19,7 +20,7 @@ public class DoubleLinkedListCircularIterator<T>  implements ListIterator<T>{
          * @param size tamaño de la lista
          * @param lista lista a la cual debe 
          */
-        public DoubleLinkedListCircularIterator(SLNode<T> desde, ListaCircularDLGeneric<T> lista){
+        public SimpleLinkedListCircularRCIterator(SLNode<T> desde, ListaCircularSLRCGeneric<T> lista){
             this.current =  desde;
             this.size = lista.tamanyo();
             this.lista = lista;
@@ -28,7 +29,7 @@ public class DoubleLinkedListCircularIterator<T>  implements ListIterator<T>{
         /**
          * Lista por la cual se va a iterar
          */
-        private ListaCircularDLGeneric<T> lista;
+        private ListaCircularSLRCGeneric<T> lista;
         
         /**
          * tamañio de la lista
