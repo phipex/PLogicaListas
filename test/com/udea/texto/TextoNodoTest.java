@@ -141,7 +141,7 @@ public class TextoNodoTest {
         System.out.println("textoInverso");
         TextoNodo instance = new TextoNodo("uno dos tres");
         String expResult = "tres dos uno ";
-        String result = instance.textoInverso();
+        String result = instance.stextoInverso();
         assertEquals(expResult, result);
         
     }
