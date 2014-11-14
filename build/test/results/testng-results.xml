@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="plistas" duration-ms="167" started-at="2014-11-14T07:24:04Z" finished-at="2014-11-14T07:24:05Z">
+    <groups>
+    </groups>
+    <test name="plistas.ListaCircularSLRCGeneric1Test1" duration-ms="167" started-at="2014-11-14T07:24:04Z" finished-at="2014-11-14T07:24:05Z">
+      <class name="plistas.ListaCircularSLRCGeneric1Test1">
+        <test-method status="PASS" signature="testIterator_DLNode3()[pri:0, instance:testIterator_DLNode3(plistas.ListaCircularSLRCGeneric1Test1)]" name="testIterator_DLNode3" duration-ms="12" started-at="2014-11-14T02:24:05Z" finished-at="2014-11-14T02:24:05Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testIterator_DLNode3 -->
+      </class> <!-- plistas.ListaCircularSLRCGeneric1Test1 -->
+    </test> <!-- plistas.ListaCircularSLRCGeneric1Test1 -->
+  </suite> <!-- plistas -->
+</testng-results>

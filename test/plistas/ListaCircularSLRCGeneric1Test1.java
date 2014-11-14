@@ -23,9 +23,9 @@ import org.junit.Test;
  *
  * @author Felipe
  */
-public class ListaCircularDLGeneric1Test {
+public class ListaCircularSLRCGeneric1Test1 {
     
-    public ListaCircularDLGeneric1Test() {
+    public ListaCircularSLRCGeneric1Test1() {
     }
     
     @BeforeClass
@@ -673,7 +673,7 @@ public class ListaCircularDLGeneric1Test {
         String expResult = "llitopo";
         ListIterator result = instance.iterator(instance.getElemento(2));
         String resultString = iterator2String(result);
-        System.out.println(resultString);
+        System.out.println("resultado:"+resultString + " se espera:"+expResult);
         assertEquals(expResult, resultString);
         // review the generated test code and remove the default call to fail.
        // fail("The test case is a prototype.");

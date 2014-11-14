@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
 
 /**
  * Clase que implementa la interface java.util.ListIterator para recorrer listas
- * doblemente ligadas circulares
+ * simple ligadas circulares con registro cabeza
  * @author Andres Felipe Montoya
  */
 public class SimpleLinkedListCircularRCIterator<T>  implements ListIterator<T>{
@@ -119,7 +119,7 @@ public class SimpleLinkedListCircularRCIterator<T>  implements ListIterator<T>{
             if (!hasPrevious()) {
                 throw new NoSuchElementException();
             }
-            current = current.getNodoAnterior();
+            current = lista.anterior(current);
             index--;
             lastAccessed = current;
             return (T)current.getDato();

@@ -1,16 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.udea.listaligada.simple;
 
-import com.udea.listaligada.doble.*;
+
 import java.util.Iterator;
 import java.util.ListIterator;
 
 /**
- * Clase que representa una lista circular doblemente ligada sin registro cabeza
+ * Clase que representa una lista circular simple ligada con registro cabeza
  * en la que sus datos son campos genericos
  * @author Andres Felipe Montoya
  */
@@ -19,7 +14,13 @@ public class ListaCircularSLRCGeneric<T> {
     /**
      * Primer nodo de la lista
      */
-    private SLNode<T> primerNodo;
+    private SLNode<T> registroCabeza;
+    
+    
+    /**
+     * Primer nodo de la lista
+     */
+//    private SLNode<T> primerNodo;
     
     /**
      * Nombre de la lista
@@ -38,7 +39,9 @@ public class ListaCircularSLRCGeneric<T> {
      */
     public ListaCircularSLRCGeneric(String cadena) {
         nombre = cadena;
-        primerNodo = null;
+        registroCabeza = new SLNode<>();
+        registroCabeza.setNodoProximo(registroCabeza);
+//        primerNodo = null;
     }
 
     /**
@@ -62,16 +65,14 @@ public class ListaCircularSLRCGeneric<T> {
      * Inserta un dato al inicio de la lista
      * @param elementoAInsertar elemento generico a insertar
      * @return el nodo que acaba de ingresar
+     * 
      */
     public synchronized SLNode<T> insertarInicio(T elementoAInsertar) {
         SLNode<T> res = null;
 
-        res = insertarFinal(elementoAInsertar);
+        res = insertar(registroCabeza,elementoAInsertar);
 
-        if (res != null) {
-            primerNodo = res;
-        }
-
+        
         return res;
     }
 
@@ -79,16 +80,17 @@ public class ListaCircularSLRCGeneric<T> {
      * Inserta un dato al final de lista
      * @param elementoAInsertar elemento generico a insertar
      * @return el nodo que acaba de ingresar
+     *  
      */
     public synchronized SLNode<T> insertarFinal(T elementoAInsertar) {
         SLNode<T> res = null;
 
         SLNode<T> anterior = null;
-        if (primerNodo != null) {//es vacio
+        
 
-            anterior = primerNodo.getNodoAnterior();
+        anterior = ultimo();
 
-        }
+        
 
         res = insertar(anterior, elementoAInsertar);
 
@@ -109,23 +111,14 @@ public class ListaCircularSLRCGeneric<T> {
         SLNode<T> res = null;
 
         if (elementoAInsertar != null) {
-            if (estaVacio()) {
-                primerNodo = new SLNode<T>(elementoAInsertar);
-                primerNodo.setNodoProximo(primerNodo);
-                primerNodo.setNodoAnterior(primerNodo);
+            
 
-                res = primerNodo;
+            SLNode<T> proximo = anterior.getNodoProximo();
+            SLNode<T> nuevoNodo = new SLNode<>(elementoAInsertar, proximo);
+            anterior.setNodoProximo(nuevoNodo);
 
-            } else if (anterior != null) {
-
-                SLNode<T> proximo = anterior.getNodoProximo();
-                SLNode<T> nuevoNodo = new SLNode<>(elementoAInsertar, proximo, anterior);
-                anterior.setNodoProximo(nuevoNodo);
-
-                proximo.setNodoAnterior(nuevoNodo);
-
-                res = nuevoNodo;
-            }
+            res = nuevoNodo;
+            
             if (res != null) {
 
                 tamanyo++;
@@ -146,8 +139,8 @@ public class ListaCircularSLRCGeneric<T> {
     public synchronized boolean contieneNodo(SLNode<T> nodo) {
         boolean res = false;
         if (!estaVacio()) {
-            SLNode<T> actual = primerNodo;
-            while (actual.getNodoProximo() != primerNodo) {
+            SLNode<T> actual = registroCabeza.getNodoProximo();
+            while (actual.getNodoProximo() != registroCabeza) {
                 if (actual.equals(nodo)) {
                     res = true;
                     break;
@@ -166,12 +159,13 @@ public class ListaCircularSLRCGeneric<T> {
      * @param desde nodo desde que se va a buscar (no verifica que este
      * dentro de la lista) 
      * @return true si lo contieno o false si no
+     * 
      */
     public synchronized boolean contieneNodo(SLNode<T> nodo, SLNode<T> desde) {
         boolean res = false;
         if (!estaVacio()) {
             SLNode<T> actual = desde;
-            while (actual.getNodoProximo() != primerNodo) {
+            while (actual.getNodoProximo() != registroCabeza) {
                 if (actual.equals(nodo)) {
                     res = true;
                     break;
@@ -188,6 +182,7 @@ public class ListaCircularSLRCGeneric<T> {
      * @param dato dato a buscar
      * @param posicion posicion desde que se debe buscar
      * @return Nodo que contiene el dato
+     * 
      */
     public synchronized SLNode<T> contieneDato(T dato, int posicion){
         
@@ -210,6 +205,7 @@ public class ListaCircularSLRCGeneric<T> {
      * Busca un determinado dato desde el inicio de la lista
      * @param dato dato a buscar
      * @return Nodo que contiene el dato
+     * @deprecated 
      */
     public synchronized SLNode<T> contienDato(T dato) {
         SLNode<T> res = null;
@@ -217,7 +213,7 @@ public class ListaCircularSLRCGeneric<T> {
         SLNode<T> desde = null;
 
         if (!estaVacio()) {
-            desde = primerNodo;
+            desde = registroCabeza.getNodoProximo();
         }
 
         res = contienDato(dato, desde);
@@ -232,12 +228,13 @@ public class ListaCircularSLRCGeneric<T> {
      * @param desde nodo desde donde busca (no verifica si el nodo pertenece a
      * la apresente lista)
      * @return nodo que contiene el dato o null en caso de no encontrarlo
+     *  
      */
     public synchronized SLNode<T> contienDato(T dato, SLNode<T> desde) {
         SLNode<T> res = null;
         if (!estaVacio() && desde != null) {
             SLNode<T> actual = desde;
-            while (actual.getNodoProximo() != primerNodo) {
+            while (actual.getNodoProximo() != registroCabeza) {
                 if (actual.getDato().equals(dato)) {
                     res = actual;
                     break;
@@ -256,14 +253,15 @@ public class ListaCircularSLRCGeneric<T> {
      * @param data dato a buscar en la lista
      * @return un entero con la posicion del elemento o -1 en caso de que no
      * exista
+     *  
      */
     public synchronized int obtienePosicion(T data) {
         int res = -1;
 
         if (!estaVacio()) {
-            SLNode<T> actual = primerNodo;
+            SLNode<T> actual = registroCabeza.getNodoProximo();
             int indice = 0;
-            while (actual.getNodoProximo() != primerNodo) {
+            while (actual.getNodoProximo() != registroCabeza) {
 
                 if (actual.getDato().equals(data)) {
                     res = indice;
@@ -284,21 +282,24 @@ public class ListaCircularSLRCGeneric<T> {
      * @param posicion poiscion en que se ingreso
      * @return true en caso de agregarlo correctamente o false en el caso
      * contrario
+     * 
      */
     public boolean insertaPosicion(T data, int posicion) {
         boolean res = false;
 
         if (posicion >= 0 && posicion < tamanyo) {
             if (!estaVacio()) {
-                SLNode<T> actual = primerNodo;
+                SLNode<T> actual = registroCabeza.getNodoProximo();
+                SLNode<T> anterior = registroCabeza;
                 int indice = 0;
-                while (actual.getNodoProximo() != primerNodo) {
+                while (actual.getNodoProximo() != registroCabeza) {
 
                     if (posicion == indice) {
-                        insertar(actual.getNodoAnterior(), data);
+                        insertar(anterior, data);
                         break;
                     }
                     indice++;
+                    anterior = actual;
                     actual = actual.getNodoProximo();
                 }
             }
@@ -315,6 +316,7 @@ public class ListaCircularSLRCGeneric<T> {
      * @param data datoa ser reemplazado
      * @param posicion posicion en al que se reemplazara el dato
      * @return El nodo con el dato cambiado
+     * 
      */
     public synchronized SLNode<T> reemplazaPosicio(T data, int posicion) {
 
@@ -337,42 +339,43 @@ public class ListaCircularSLRCGeneric<T> {
      * @throws ExcepcionListaVacia
      * @deprecated solo remueve el ultimo y para eso recorre toda la lista
      */
-    public synchronized T remover()
-            throws ExcepcionListaVacia {
-        SLNode NodoARemover = primerNodo;
-        T elementoARemover = null;
-
-        if (estaVacio()) {
-            throw new ExcepcionListaVacia(nombre);
-        }
-
-        elementoARemover = primerNodo.getDato();
-
-        if (primerNodo == primerNodo.getNodoProximo()) {
-            primerNodo = null;
-        } else {
-            SLNode<T> actual = primerNodo;
-            while (actual.getNodoProximo() != primerNodo) {
-                actual = actual.getNodoProximo();
-            }
-            SLNode<T> ultimoNodo = actual;
-
-            primerNodo = primerNodo.getNodoProximo();
-            ultimoNodo.setNodoProximo(primerNodo);
-            primerNodo.setNodoAnterior(ultimoNodo);
-        }
-
-        NodoARemover.setNodoProximo(null);
-        NodoARemover.setNodoAnterior(null);
-
-        tamanyo--;
-
-        return elementoARemover;
-    }
+//    public synchronized T remover()
+//            throws ExcepcionListaVacia {
+//        SLNode NodoARemover = registroCabeza.getNodoProximo();
+//        T elementoARemover = null;
+//
+//        if (estaVacio()) {
+//            throw new ExcepcionListaVacia(nombre);
+//        }
+//
+//        elementoARemover = primerNodo.getDato();
+//
+//        if (primerNodo == primerNodo.getNodoProximo()) {
+//            primerNodo = null;
+//        } else {
+//            SLNode<T> actual = primerNodo;
+//            while (actual.getNodoProximo() != primerNodo) {
+//                actual = actual.getNodoProximo();
+//            }
+//            SLNode<T> ultimoNodo = actual;
+//
+//            primerNodo = primerNodo.getNodoProximo();
+//            ultimoNodo.setNodoProximo(primerNodo);
+//            primerNodo.setNodoAnterior(ultimoNodo);
+//        }
+//
+//        NodoARemover.setNodoProximo(null);
+//        NodoARemover.setNodoAnterior(null);
+//
+//        tamanyo--;
+//
+//        return elementoARemover;
+//    }
     
     /**
      * Remueve el nodo correspondiente a la posicion indicada
      * @param posicion posicion del nodo a remover
+     * @deprecated 
      */
     public synchronized void remover(int posicion){
         remover(getElemento(posicion));
@@ -382,13 +385,14 @@ public class ListaCircularSLRCGeneric<T> {
      * Remueve la serie de datos entre las posiciones ingresadas
      * @param inicia posicion desde que se debe remover datos
      * @param finaliza posicion hasta la que se debe remover datos
+     * @drecated 
      */
     public synchronized void remover(int inicia, int finaliza){
         
         
         if (!this.estaVacio() && inicia > -1 && finaliza > -1 && finaliza < tamanyo) {
 
-            if (inicia > finaliza) {
+            if (inicia > finaliza) {//intercambia los 
                 int tem = inicia;
                 
                 inicia = finaliza;
@@ -397,23 +401,24 @@ public class ListaCircularSLRCGeneric<T> {
                 
             }
             
+            SLNode<T> anteriordesde = getElemento(inicia-1);
             
-            SLNode<T> thisnododesde = getElemento(inicia);
-
+            SLNode<T> thisnododesde = anteriordesde.getNodoProximo();
+            
             int cuantos = finaliza - inicia;
             
             int indice = 0;
 
-            while (thisnododesde.getNodoProximo() != primerNodo) {
+            while (thisnododesde.getNodoProximo() != registroCabeza) {
                 if (indice <= cuantos) {
                     
-                    remover(thisnododesde);
-                    thisnododesde = thisnododesde.getNodoAnterior();
+                    anteriordesde.setNodoProximo(thisnododesde.getNodoProximo());
                     
                     indice++;
                 } else {
                     break;
                 }
+                
                 thisnododesde = thisnododesde.getNodoProximo();
             }
 
@@ -426,6 +431,7 @@ public class ListaCircularSLRCGeneric<T> {
      *
      * @param nodoARemover nodo A Remover
      * @throws ExcepcionListaVacia
+     *  
      */
     public synchronized SLNode<T> remover(SLNode nodoARemover) throws ExcepcionListaVacia {
 
@@ -435,30 +441,31 @@ public class ListaCircularSLRCGeneric<T> {
             throw new ExcepcionListaVacia(nombre);
         }
 
-        if (primerNodo == nodoARemover) {
-            primerNodo = nodoARemover.getNodoProximo();
-        } else if (nodoARemover != null) {
-            SLNode<T> anterior = nodoARemover.getNodoAnterior();
-            SLNode<T> proximo = nodoARemover.getNodoProximo();
-            anterior.setNodoProximo(proximo);
-            proximo.setNodoAnterior(anterior);
+        if (nodoARemover != null) {
+            SLNode<T> anterior = anterior(nodoARemover);
             
-            res = proximo;
+            if (anterior != null) {//nodo dentro de la lista
+                SLNode<T> proximo = nodoARemover.getNodoProximo();
+                anterior.setNodoProximo(proximo);
+                res = proximo;
+                tamanyo--;
+            }
             
-        } else {
-            tamanyo++;
-        }
+        } 
 
-        tamanyo--;
+        
 
         return res;
     }
 
+    
+    
     /**
      * ingresa un sublista al final
      *
      * @param lista
      * @return si se logro ingresar a la lista
+     *  
      */
     public synchronized boolean ingresaLista(ListaCircularSLRCGeneric lista) {
         boolean res = false;
@@ -482,6 +489,7 @@ public class ListaCircularSLRCGeneric<T> {
      * @param lista lista por la cual se va reemplazar
      * @param posicion posicion desde la que se va a reemplazar
      * @return verdadero si se logro reemplazar
+     *  
      */
     public synchronized boolean reemplazaLista(ListaCircularSLRCGeneric lista, int posicion) {
 
@@ -522,6 +530,7 @@ public class ListaCircularSLRCGeneric<T> {
      * @param lista sublista que se desea buscar
      * @return retorna la posicion donde se encuentra la sublista o -1 en caso
      * contrario
+     *  
      */
     public synchronized int encontrasLista(ListaCircularSLRCGeneric<T> lista) {
         return encontrasLista(lista, 0);
@@ -536,6 +545,7 @@ public class ListaCircularSLRCGeneric<T> {
      * @param lista lista a buscar
      * @param desde posicion desde la que se va a buscar
      * @return
+     *  
      */
     public synchronized int encontrasLista(ListaCircularSLRCGeneric<T> lista, int desde) {
 
@@ -548,12 +558,12 @@ public class ListaCircularSLRCGeneric<T> {
             if (lista.tamanyo() <= tamanyo && thisnododesde != null) {
                 
 
-                SLNode<T> listanododesde = lista.primerNodo;
+                SLNode<T> listanododesde = lista.getElemento(0);
 
                 int indice = desde;
                 int indicelista = 0;
                 boolean anterior = false;
-                while (thisnododesde.getNodoProximo() != primerNodo) {
+                while (thisnododesde.getNodoProximo() != registroCabeza) {
 
                     //si los datos son iguales
                     T objectList = listanododesde.getDato();
@@ -569,7 +579,7 @@ public class ListaCircularSLRCGeneric<T> {
                         if (indicelista < lista.tamanyo) {
                             anterior = false;
                             res = -1;
-                            listanododesde = lista.primerNodo;
+                            listanododesde = lista.getElemento(0);
                             indicelista = 0;
                         } else {
                             break;
@@ -589,17 +599,18 @@ public class ListaCircularSLRCGeneric<T> {
     
 
     /**
-     * retorna el nodo en la posicion establecida
+     * retorna el nodo en la posicion establecida, comienza desde 0
      *
      * @param posicion posision por la cual se esta preguntando
      * @return nodo en la posicion establecida o null en caso de no encotrarlo
+     *  
      */
     public synchronized SLNode<T> getElemento(int posicion) {
         SLNode<T> res = null;
 
         if (!estaVacio() && posicion >= 0 && posicion < tamanyo) {
 
-            SLNode<T> actual = primerNodo;
+            SLNode<T> actual = registroCabeza.getNodoProximo();
             int indicec = 0;
             do {
 
@@ -610,7 +621,7 @@ public class ListaCircularSLRCGeneric<T> {
                 }
                 indicec++;
                 actual = actual.getNodoProximo();
-            } while (actual.getNodoProximo() != primerNodo);
+            } while (actual.getNodoProximo() != registroCabeza);
 
         }
 
@@ -623,7 +634,7 @@ public class ListaCircularSLRCGeneric<T> {
      * @return verdadero si la lista es vacia
      */
     public synchronized boolean estaVacio() {
-        return primerNodo == null;
+        return (registroCabeza == registroCabeza.getNodoProximo());
     }
 
     /**
@@ -637,12 +648,12 @@ public class ListaCircularSLRCGeneric<T> {
 
         System.out.print("La lista " + nombre + " es: ");
 
-        SLNode<T> actual = primerNodo;
+        SLNode<T> actual = registroCabeza.getNodoProximo();
 
         do {
             System.out.print(actual.getDato().toString() + " ");
             actual = actual.getNodoProximo();
-        } while (actual != primerNodo);
+        } while (actual != registroCabeza);
 
         System.out.println("\n");
     }
@@ -658,37 +669,37 @@ public class ListaCircularSLRCGeneric<T> {
     public synchronized ListaCircularSLRCGeneric<T> sublista(int inicia, int finaliza) {
         ListaCircularSLRCGeneric<T> res = null;
 
-        if (!this.estaVacio() && inicia > -1 && finaliza > -1 && finaliza < tamanyo) {
-
-            if (inicia > finaliza) {
-                int tem = inicia;
-                
-                inicia = finaliza;
-                
-                finaliza = tem;
-                
-            }
-            
-            
-            res = new ListaCircularSLRCGeneric<T>();
-
-            SLNode<T> thisnododesde = getElemento(inicia);
-
-            int indice = inicia;
-
-            while (thisnododesde.getNodoProximo() != primerNodo) {
-                if (indice <= finaliza) {
-                    
-                    T objeto = thisnododesde.getDato();
-                    
-                    res.insertarFinal(objeto);
-                } else {
-                    break;
-                }
-                thisnododesde = thisnododesde.getNodoProximo();
-            }
-
-        }
+//        if (!this.estaVacio() && inicia > -1 && finaliza > -1 && finaliza < tamanyo) {
+//
+//            if (inicia > finaliza) {
+//                int tem = inicia;
+//                
+//                inicia = finaliza;
+//                
+//                finaliza = tem;
+//                
+//            }
+//            
+//            
+//            res = new ListaCircularSLRCGeneric<T>();
+//
+//            SLNode<T> thisnododesde = getElemento(inicia);
+//
+//            int indice = inicia;
+//
+//            while (thisnododesde.getNodoProximo() != primerNodo) {
+//                if (indice <= finaliza) {
+//                    
+//                    T objeto = thisnododesde.getDato();
+//                    
+//                    res.insertarFinal(objeto);
+//                } else {
+//                    break;
+//                }
+//                thisnododesde = thisnododesde.getNodoProximo();
+//            }
+//
+//        }
 
         return res;
     }
@@ -700,6 +711,7 @@ public class ListaCircularSLRCGeneric<T> {
      * @param desde posicion desde la que se debe buscar la sublista
      * @param hasta posicion hasta la que se debe buscar la sublista
      * @return una nueva lista con los datos encontrados
+     * @deprecated 
      */
     public synchronized ListaCircularSLRCGeneric<T> subHilera(int desde, int hasta){
         
@@ -784,6 +796,7 @@ public class ListaCircularSLRCGeneric<T> {
      * Retorna un objeto iterator desde una posicion en especifico
      * @param desde
      * @return 
+     * @deprecated 
      */
     public ListIterator<T> iterator(int desde) {
         ListIterator<T> iterator = null;
@@ -799,11 +812,13 @@ public class ListaCircularSLRCGeneric<T> {
     /**
      * retorna un objeto iterator desde el primer nodo
      * @return 
+     * @deprecated 
      */
     public ListIterator<T> iterator() {
 
         ListIterator<T> iterator = null;
 
+        SLNode<T> primerNodo = registroCabeza.getNodoProximo();
         if (primerNodo != null) {
             //iterator = new DoublyLinkedListIterator(primerNodo,tamanyo);
             iterator = new SimpleLinkedListCircularRCIterator<T>(primerNodo,  this);
@@ -816,6 +831,7 @@ public class ListaCircularSLRCGeneric<T> {
      * retorna un objeto iterator desde un nodo en expecifico
      * @param desde
      * @return 
+     * @deprecated 
      */
     public ListIterator<T> iterator(SLNode<T> desde) {
 
@@ -829,6 +845,45 @@ public class ListaCircularSLRCGeneric<T> {
         return iterator;
     }
 
+    public SLNode<T> ultimo(){
+    
+        SLNode<T> ultimo = null;
+        
+        if (!estaVacio()) {
+            ultimo = registroCabeza.getNodoProximo();
+            while (ultimo.getNodoProximo() != registroCabeza) {
+                
+                ultimo = ultimo.getNodoProximo();
+            }
+        }
+        
+        
+        return ultimo;
+        
+    }
+    
+    public SLNode<T> anterior(SLNode<T> actual){
+    
+        SLNode<T> anterior = null;
+        
+        if (actual != null) {
+            SLNode<T> temp = null;
+            
+            anterior = registroCabeza;
+            
+            temp = registroCabeza.getNodoProximo();
+            
+            while ((temp != registroCabeza) && (temp != actual)) {
+                anterior = temp;
+                temp= temp.getNodoProximo();
+                
+            }
+        }
+        
+        return anterior;
+        
+    }
+    
     
 //    
 //    public static void main(String args[]) {

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [plistas]">
+  <test name="plistas.ListaCircularSLRCGeneric1Test1(failed)" junit="true">
+    <classes>
+      <class name="plistas.ListaCircularSLRCGeneric1Test1">
+        <methods>
+          <include name="testIterator_DLNode3"/>
+        </methods>
+      </class> <!-- plistas.ListaCircularSLRCGeneric1Test1 -->
+    </classes>
+  </test> <!-- plistas.ListaCircularSLRCGeneric1Test1(failed) -->
+</suite> <!-- Failed suite [plistas] -->

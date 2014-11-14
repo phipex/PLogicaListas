@@ -7,7 +7,7 @@ package com.udea.texto;
 
 import com.udea.listaligada.doble.SLNode;
 import java.util.Iterator;
-import com.udea.listaligada.doble.ListaCircularDLGeneric;
+import com.udea.listaligada.doble.ListaCircularSLRCGeneric;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -25,7 +25,7 @@ public class Texto {
     /**
      * Lista Doblemente Ligada Circular que contiene el texto de la instancia 
      */
-    private ListaCircularDLGeneric<Character> texto;
+    private ListaCircularSLRCGeneric<Character> texto;
 
     /**
      * Campo de la instancia que contiene el nombre del texto
@@ -42,7 +42,7 @@ public class Texto {
 
         this.nombre = nombre;
 
-        this.texto = new ListaCircularDLGeneric<Character>(nombre);
+        this.texto = new ListaCircularSLRCGeneric<Character>(nombre);
 
         char[] array = texto.toCharArray();
 
@@ -479,7 +479,7 @@ public class Texto {
      * retorna la lista doblemente ligada circular que represena al texto
      * @return lista doblemente ligada circular que represena al texto
      */
-    public ListaCircularDLGeneric<Character> getTexto() {
+    public ListaCircularSLRCGeneric<Character> getTexto() {
         return texto;
     }
 

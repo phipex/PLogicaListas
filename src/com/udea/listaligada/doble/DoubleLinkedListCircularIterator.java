@@ -19,7 +19,7 @@ public class DoubleLinkedListCircularIterator<T>  implements ListIterator<T>{
          * @param size tamaño de la lista
          * @param lista lista a la cual debe 
          */
-        public DoubleLinkedListCircularIterator(SLNode<T> desde, ListaCircularDLGeneric<T> lista){
+        public DoubleLinkedListCircularIterator(SLNode<T> desde, ListaCircularSLRCGeneric<T> lista){
             this.current =  desde;
             this.size = lista.tamanyo();
             this.lista = lista;
@@ -28,7 +28,7 @@ public class DoubleLinkedListCircularIterator<T>  implements ListIterator<T>{
         /**
          * Lista por la cual se va a iterar
          */
-        private ListaCircularDLGeneric<T> lista;
+        private ListaCircularSLRCGeneric<T> lista;
         
         /**
          * tamañio de la lista
