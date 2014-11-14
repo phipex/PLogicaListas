@@ -211,7 +211,7 @@ public class ListaCircularSLRCGeneric<T> {
      * Busca un determinado dato desde el inicio de la lista
      * @param dato dato a buscar
      * @return Nodo que contiene el dato
-     * @deprecated 
+     * 
      */
     public synchronized SLNode<T> contienDato(T dato) {
         SLNode<T> res = null;

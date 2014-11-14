@@ -41,32 +41,9 @@ public class TextoTest {
     public void tearDown() {
     }
 
-    /**
-     * Test of imprimir method, of class Texto.
-     */
-    @Test
-    public void testImprimir() {
-        System.out.println("imprimir");
-        Texto instance = null;
-        instance.imprimir();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+    
 
-    /**
-     * Test of getPalabraDesde method, of class Texto.
-     */
-    @Test
-    public void testGetPalabraDesde() {
-        System.out.println("getPalabraDesde");
-        int desde = 0;
-        Texto instance = null;
-        String expResult = "";
-        String result = instance.getPalabraDesde(desde);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+    
 
     /**
      * Test of mostrarTexto method, of class Texto.
