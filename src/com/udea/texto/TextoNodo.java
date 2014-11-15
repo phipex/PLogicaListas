@@ -11,6 +11,7 @@ import com.udea.listaligada.simple.SLNode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -73,16 +74,20 @@ public class TextoNodo {
     public Map<String, Integer> getConteoPalabras(){
         Map<String, Integer> conteo = new HashMap<String, Integer>();
         
-        List<String> prepos = Arrays.asList(PREPOS);
+        
         
         for (Iterator it = this.listaLigada.iterator(); it.hasNext();) {
             String palabra = it.next().toString();
+            palabra = limpiaPalabra(palabra);
             
-            if (conteo.containsKey( palabra )) {
-                int count = conteo.get( palabra );
-                conteo.put( palabra, count + 1);
-            } else {
-                conteo.put( palabra,1 );
+            if (validaPalabra(palabra)) {
+                
+                if (conteo.containsKey(palabra)) {
+                    int count = conteo.get(palabra);
+                    conteo.put(palabra, count + 1);
+                } else {
+                    conteo.put(palabra, 1);
+                }
             }
                 
             
@@ -91,6 +96,8 @@ public class TextoNodo {
         
         return conteo;
     }
+
+    
     
     //<editor-fold defaultstate="collapsed" desc="Conteo Preposiciones">
     
@@ -108,16 +115,19 @@ public class TextoNodo {
         
         for (Iterator it = this.listaLigada.iterator(); it.hasNext();) {
             String palabra = it.next().toString();
-            
-            if(prepos.contains(palabra)){
+            palabra = limpiaPalabra(palabra);
+            if (validaPalabra(palabra)) {
                 
-                if (conteo.containsKey( palabra )) {
-                    int count = conteo.get( palabra );
-                    conteo.put( palabra, count + 1);
-                } else {
-                    conteo.put( palabra,1 );
+                if (prepos.contains(palabra)) {
+                    
+                    if (conteo.containsKey(palabra)) {
+                        int count = conteo.get(palabra);
+                        conteo.put(palabra, count + 1);
+                    } else {
+                        conteo.put(palabra, 1);
+                    }
+                    
                 }
-                
             }
             
         }
@@ -185,6 +195,24 @@ public class TextoNodo {
         return lista;
         
     }
+    
+    public static String limpiaPalabra(String palabra) {
+        palabra = palabra.trim();
+        palabra = palabra.replaceAll(",", "");
+        return palabra;
+    }
+    
+    public static boolean validaPalabra(String palabra){
+        boolean isValida = false;
+        
+        isValida = isValida || (palabra != null);
+        
+        isValida = isValida || (!"".equals(palabra));
+        
+        
+        return isValida;
+    
+    }
 //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="Texto con tildes">
@@ -200,16 +228,18 @@ public class TextoNodo {
         
         for (Iterator it = this.listaLigada.iterator(); it.hasNext();) {
             String palabra = it.next().toString();
-            
-            if(tieneTildes(palabra)){
-                
-                if (conteo.containsKey( palabra )) {
-                    int count = conteo.get( palabra );
-                    conteo.put( palabra, count + 1);
-                } else {
-                    conteo.put( palabra,1 );
+            palabra = limpiaPalabra(palabra);
+            if (validaPalabra(palabra)) {
+                if (tieneTildes(palabra)) {
+                    
+                    if (conteo.containsKey(palabra)) {
+                        int count = conteo.get(palabra);
+                        conteo.put(palabra, count + 1);
+                    } else {
+                        conteo.put(palabra, 1);
+                    }
+                    
                 }
-                
             }
             
         }
@@ -341,7 +371,7 @@ public class TextoNodo {
      */
     public List<String> ltextoAlfabetico() {
         List<String> lista = copyIterator(this.listaLigada.iterator());
-        Collections.sort(lista);
+        Collections.sort(lista,ALPHABETICAL_ORDER);
         return lista;
     }
     
@@ -447,7 +477,15 @@ public class TextoNodo {
         
     }
     
-    
+    private static Comparator<String> ALPHABETICAL_ORDER = new Comparator<String>() {
+        public int compare(String str1, String str2) {
+            int res = String.CASE_INSENSITIVE_ORDER.compare(str1, str2);
+            if (res == 0) {
+                res = str1.compareTo(str2);
+            }
+            return res;
+        }
+    };
 //</editor-fold>
     
 //<editor-fold defaultstate="collapsed" desc="Object Override">
