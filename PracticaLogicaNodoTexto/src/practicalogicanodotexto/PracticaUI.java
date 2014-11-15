@@ -98,6 +98,7 @@ public class PracticaUI extends javax.swing.JFrame {
         aboutMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Primera Practica Logica III");
 
         jTextAreaTextoOriginal.setEditable(false);
         jTextAreaTextoOriginal.setColumns(20);
