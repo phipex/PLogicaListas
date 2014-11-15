@@ -1,7 +1,6 @@
 
 package com.udea.listaligada.simple;
 
-import com.udea.listaligada.doble.*;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
@@ -12,7 +11,7 @@ import java.util.NoSuchElementException;
  */
 public class SimpleLinkedListCircularRCIterator<T>  implements ListIterator<T>{
           
-       //TODO convertir para crear una version reversa segun parametro
+       
         
         /**
          * contructor de la clase

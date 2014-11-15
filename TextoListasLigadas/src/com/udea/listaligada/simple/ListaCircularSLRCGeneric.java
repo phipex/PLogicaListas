@@ -338,50 +338,12 @@ public class ListaCircularSLRCGeneric<T> {
 
     }
 
-    /**
-     * remueve el ultimo dato de la lista
-     *
-     * @return elemento A Remover
-     * @throws ExcepcionListaVacia
-     * @deprecated solo remueve el ultimo y para eso recorre toda la lista
-     */
-//    public synchronized T remover()
-//            throws ExcepcionListaVacia {
-//        SLNode NodoARemover = registroCabeza.getNodoProximo();
-//        T elementoARemover = null;
-//
-//        if (estaVacio()) {
-//            throw new ExcepcionListaVacia(nombre);
-//        }
-//
-//        elementoARemover = primerNodo.getDato();
-//
-//        if (primerNodo == primerNodo.getNodoProximo()) {
-//            primerNodo = null;
-//        } else {
-//            SLNode<T> actual = primerNodo;
-//            while (actual.getNodoProximo() != primerNodo) {
-//                actual = actual.getNodoProximo();
-//            }
-//            SLNode<T> ultimoNodo = actual;
-//
-//            primerNodo = primerNodo.getNodoProximo();
-//            ultimoNodo.setNodoProximo(primerNodo);
-//            primerNodo.setNodoAnterior(ultimoNodo);
-//        }
-//
-//        NodoARemover.setNodoProximo(null);
-//        NodoARemover.setNodoAnterior(null);
-//
-//        tamanyo--;
-//
-//        return elementoARemover;
-//    }
+   
     
     /**
      * Remueve el nodo correspondiente a la posicion indicada
      * @param posicion posicion del nodo a remover
-     * @deprecated 
+     * 
      */
     public synchronized void remover(int posicion){
         remover(getElemento(posicion));
@@ -391,7 +353,7 @@ public class ListaCircularSLRCGeneric<T> {
      * Remueve la serie de datos entre las posiciones ingresadas
      * @param inicia posicion desde que se debe remover datos
      * @param finaliza posicion hasta la que se debe remover datos
-     * @drecated 
+     *  
      */
     public synchronized void remover(int inicia, int finaliza){
         
@@ -664,52 +626,7 @@ public class ListaCircularSLRCGeneric<T> {
         System.out.println("\n");
     }
 
-    /**
-     * Retorna una sublista con los valores entre las posiciones ingresadas en 
-     * los parametros
-     * @param desde posicion desde la que se debe buscar la sublista
-     * @param hasta posicion hasta la que se debe buscar la sublista
-     * @return una nueva lista con los datos encontrados
-     * @deprecated reemplazada por subHilera
-     */
-    public synchronized ListaCircularSLRCGeneric<T> sublista(int inicia, int finaliza) {
-        ListaCircularSLRCGeneric<T> res = null;
-
-//        if (!this.estaVacio() && inicia > -1 && finaliza > -1 && finaliza < tamanyo) {
-//
-//            if (inicia > finaliza) {
-//                int tem = inicia;
-//                
-//                inicia = finaliza;
-//                
-//                finaliza = tem;
-//                
-//            }
-//            
-//            
-//            res = new ListaCircularSLRCGeneric<T>();
-//
-//            SLNode<T> thisnododesde = getElemento(inicia);
-//
-//            int indice = inicia;
-//
-//            while (thisnododesde.getNodoProximo() != primerNodo) {
-//                if (indice <= finaliza) {
-//                    
-//                    T objeto = thisnododesde.getDato();
-//                    
-//                    res.insertarFinal(objeto);
-//                } else {
-//                    break;
-//                }
-//                thisnododesde = thisnododesde.getNodoProximo();
-//            }
-//
-//        }
-
-        return res;
-    }
-    
+   
     
     /**
      * Retorna una sublista con los valores entre las posiciones ingresadas en 
@@ -717,7 +634,7 @@ public class ListaCircularSLRCGeneric<T> {
      * @param desde posicion desde la que se debe buscar la sublista
      * @param hasta posicion hasta la que se debe buscar la sublista
      * @return una nueva lista con los datos encontrados
-     * @deprecated 
+     *  
      */
     public synchronized ListaCircularSLRCGeneric<T> subHilera(int desde, int hasta){
         
@@ -818,7 +735,7 @@ public class ListaCircularSLRCGeneric<T> {
     /**
      * retorna un objeto iterator desde el primer nodo
      * @return 
-     * @deprecated 
+     * 
      */
     public ListIterator<T> iterator() {
 
@@ -837,7 +754,7 @@ public class ListaCircularSLRCGeneric<T> {
      * retorna un objeto iterator desde un nodo en expecifico
      * @param desde
      * @return 
-     * @deprecated 
+     * 
      */
     public ListIterator<T> iterator(SLNode<T> desde) {
 
@@ -923,194 +840,5 @@ public class ListaCircularSLRCGeneric<T> {
         return ultimo;
         
     }
-//    
-//    public static void main(String args[]) {
-//        ListaCircularDLGeneric<Character> lista = crearListaString("por un caminito");
-//        
-//        ListaCircularDLGeneric<Character> lista2 = lista.subHilera(12, 0);
-//        
-//        for (Iterator it = lista2.iterator(0); it.hasNext();) {
-//            Object object = it.next();
-//            System.out.println(object);
-//        }
-//        
-//    }
-//    
-//    public static void main5(String args[]) {
-//        ListaCircularDLGeneric<Character> lista = crearListaString("otota");
-//        
-//        for (Iterator it = lista.iterator(lista.getElemento(2)); it.hasNext();) {
-//            Object object = it.next();
-//            System.out.println(object);
-//        }
-//        
-//        
-//        
-//    }
-//    
-//    public static void main4(String args[]) {
-//        ListaCircularDLGeneric<Character> lista = crearListaString("otota");
-//        System.out.println("lista:" + lista.toString(false));
-//
-//        int posicion = 1;
-//        ListaCircularDLGeneric<Character> instance = crearListaString("pollito");
-//        System.out.println("instancia:" + instance.toString(false));
-//        String expResult = "pototao";
-//        instance.reemplazaLista(lista, posicion);
-//        String result = instance.toString(false);
-//        System.out.println("despues: " + instance.toString(false));
-//
-//        ListaCircularDLGeneric<Character> instance2 = new ListaCircularDLGeneric<>();
-//
-//        System.out.println(instance2);
-//    }
-//
-//    public static ListaCircularDLGeneric<Character> crearListaString(String texto) {
-//        ListaCircularDLGeneric<Character> lista = null;
-//
-//        if (texto != null && !texto.isEmpty()) {
-//            lista = new ListaCircularDLGeneric<Character>("texto");
-//
-//            char[] array = texto.toCharArray();
-//
-//            for (char c : array) {
-//                lista.insertarFinal(c);
-//            }
-//        }
-//
-//        return lista;
-//
-//    }
-//
-//    public static void main3(String args[]) {
-//        ListaCircularDLGeneric<Character> lista = new ListaCircularDLGeneric<Character>("texto");
-//
-//        String texto = "un pollito comiendo pechuga";
-//
-//        char[] array = texto.toCharArray();
-//
-//        for (char c : array) {
-//            lista.insertarFinal(c);
-//        }
-//
-//        System.out.println(lista);
-//
-//        boolean contien_n = (lista.contienDato('n') != null) ? true : false;
-//        System.out.println("contiene la n" + contien_n);
-//
-//        boolean contien_D = (lista.contienDato('D') != null) ? true : false;
-//        System.out.println("contiene la D" + contien_D);
-//
-//        boolean contien_d = (lista.contienDato('d') != null) ? true : false;
-//        System.out.println("contiene la d" + contien_d);
-//
-//    }
-//
-//    public static void main2(String args[]) {
-////        ListaCircularDL lista = new ListaCircularDL();
-////
-////        Boolean booleano = Boolean.TRUE;
-////        Character caracter = new Character('$');
-////        Integer entero = new Integer(34567);
-////        String cadena = "hola";
-////        lista.insertar(booleano);
-////        lista.imprimir();
-////        lista.insertar(caracter);
-////        lista.imprimir();
-////        lista.insertar(entero);
-////        lista.imprimir();
-////        lista.insertar(cadena);
-////        lista.imprimir();
-////        Object objetoRemovido;
-////        try {
-////            objetoRemovido = lista.remover();
-////            System.out.println(
-////                    objetoRemovido.toString() + " removido");
-////            lista.imprimir();
-////            objetoRemovido = lista.remover();
-////            System.out.println(
-////                    objetoRemovido.toString() + " removido");
-////            lista.imprimir();
-////            objetoRemovido = lista.remover();
-////            System.out.println(
-////                    objetoRemovido.toString() + " removido");
-////            lista.imprimir();
-////            objetoRemovido = lista.remover();
-////            System.out.println(
-////                    objetoRemovido.toString() + " removido");
-////            lista.imprimir();
-////        } catch (ExcepcionListaVacia excepcionListaVacia) {
-////            excepcionListaVacia.printStackTrace();
-////        }
-//
-//        int N = 6;
-//
-//        // add elements 1, ..., tamanyo
-//        System.out.println(N + " random integers between 0 and 99");
-//        ListaCircularDLGeneric list = new ListaCircularDLGeneric();
-//
-//        for (int i = 0; i < N; i++) {
-//            //int enteroRand = (int) (100 * Math.random());
-//
-//            //list.insertar(Integer.valueOf(enteroRand));
-//            list.insertarFinal(i);
-//        }
-//
-//        list.imprimir();
-//
-//        ListIterator iterator = list.iterator();
-//
-//        // go forwards with next() and set()
-//        System.out.println("add 1 to each element via next() and set()");
-//        while (iterator.hasNext()) {
-//            int x = (int) iterator.next();
-//            iterator.set(x + 1);
-//        }
-//        list.imprimir();
-//
-//        // go backwards with previous() and set()
-//        System.out.println("multiply each element by 3 via previous() and set()");
-//        while (iterator.hasPrevious()) {
-//            int x = (int) iterator.previous();
-//            iterator.set(x + x + x);
-//        }
-//        list.imprimir();
-//
-//        // remove all elements that are multiples of 4 via next() and remove()
-//        System.out.println("remove elements that are a multiple of 4 via next() and remove()");
-//        while (iterator.hasNext()) {
-//            int x = (int) iterator.next();
-//            if (x % 4 == 0) {
-//                iterator.remove();
-//            }
-//        }
-//        list.imprimir();
-//
-//        // remove all even elements via previous() and remove()
-//        System.out.println("remove elements that are even via previous() and remove()");
-//        while (iterator.hasPrevious()) {
-//            int x = (int) iterator.previous();
-//            if (x % 2 == 0) {
-//                iterator.remove();
-//            }
-//        }
-//        list.imprimir();
-//
-//        // add elements via next() and add()
-//        System.out.println("add elements via next() and add() " + iterator.nextIndex());
-//        while (iterator.hasNext()) {
-//            int x = (int) iterator.next();
-//            iterator.add(Integer.valueOf(x + 1));
-//        }
-//        list.imprimir();
-//
-//        // add elements via previous() and add()
-//        System.out.println("add elements via previous() and add()");
-//        while (iterator.hasPrevious()) {
-//            int x = (int) iterator.previous();
-//            iterator.add(Integer.valueOf(x * 10));
-//            iterator.previous();
-//        }
-//        list.imprimir();
-//    }
+
 }

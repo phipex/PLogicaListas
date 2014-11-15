@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.udea.texto;
 
 import com.udea.listaligada.simple.ListaCircularSLRCGeneric;
@@ -195,13 +189,22 @@ public class TextoNodo {
         return lista;
         
     }
-    
+    /**
+     * Le quita a la palabra los espacios finales e iniciales y quita las comas
+     * @param palabra
+     * @return 
+     */
     public static String limpiaPalabra(String palabra) {
         palabra = palabra.trim();
         palabra = palabra.replaceAll(",", "");
         return palabra;
     }
     
+    /**
+     * Valida que la palabra no sea nula, un string vacio o un espacio
+     * @param palabra
+     * @return 
+     */
     public static boolean validaPalabra(String palabra){
         boolean isValida = false;
         
@@ -209,7 +212,7 @@ public class TextoNodo {
         
         isValida = isValida || (!"".equals(palabra));
         
-        
+        isValida = isValida || (!" ".equals(palabra));
         return isValida;
     
     }
@@ -525,12 +528,6 @@ public class TextoNodo {
     }
     
 //</editor-fold>
-    public static void main(String[] args){
     
-        String a = "á";
-        
-        System.out.println(""+a + " "+ a.toUpperCase());
-        
-    }
     
 }

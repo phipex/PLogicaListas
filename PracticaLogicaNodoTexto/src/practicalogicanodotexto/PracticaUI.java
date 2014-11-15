@@ -8,7 +8,6 @@ package practicalogicanodotexto;
 
 import com.udea.texto.TextoNodo;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -23,15 +22,15 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author sony vaio
+ * Clase en cargada de gestion la interfaz de la aplicacion
+ * @author Andres Felipe Montoya
  */
 public class PracticaUI extends javax.swing.JFrame {
 
     private TextoNodo textoNodo = null;
     
     /**
-     * Creates new form NewApplication
+     * Creates new form PracticaUI
      */
     public PracticaUI() {
         initComponents();
@@ -494,10 +493,18 @@ public class PracticaUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * evento que se dispara al dar click en el menu exit
+     * @param evt 
+     */
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
         System.exit(0);
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
+    /**
+     * evento que se dispara cuando se le da click en el menu open
+     * @param evt 
+     */
     private void fileMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileMenuActionPerformed
         // TODO add your handling code here:
         System.out.println("me dieron");
@@ -514,6 +521,19 @@ public class PracticaUI extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_fileMenuActionPerformed
 
+    /**
+     * Gestiona la carga del archivo, la conversión de dicho archivo a la Clase 
+     * TextoNodo y rellena todos los controles con la info solicitada.
+     * - Crea una instancia del objeto textoNodo
+     * - Muesta en pantalla el texto asociado al objeto textoNodo
+     * - Rellena la informacion en el tab Preposiciones
+     * - Rellena la informacion en el tab Tildadas
+     * - Rellena la informacion en el tab Alfabetico
+     * - Rellena la informacion en el tab Inverso
+     * 
+     * @param file
+     * @throws IOException 
+     */
     public void gestionArchivoLeido(File file) throws IOException {
         // What to do with the file, e.g. display it in a TextArea
         String content = readFile(file.getAbsolutePath(), StandardCharsets.ISO_8859_1);
@@ -562,6 +582,10 @@ public class PracticaUI extends javax.swing.JFrame {
         fileMenuActionPerformed(evt);
     }//GEN-LAST:event_openMenuItemActionPerformed
 
+    /**
+     * Evento que se dispara cuando le dan click al boton sustituir
+     * @param evt 
+     */
     private void jButtonSustituirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSustituirActionPerformed
         
         if (textoNodo != null) {
@@ -580,10 +604,20 @@ public class PracticaUI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonSustituirActionPerformed
 
+    /**
+     * Evento que se dispara cuando le dan click al boton reiniciar en el tab 
+     * de sustuir
+     * @param evt 
+     */
     private void jButtonReiniciarSustiuirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReiniciarSustiuirActionPerformed
         jTextAreaSustituir.setText("");
     }//GEN-LAST:event_jButtonReiniciarSustiuirActionPerformed
 
+    /**
+     * Evento que se dispara cuando le da clicj en el boton reiniciar en el tab
+     * de Eliminar
+     * @param evt 
+     */
     private void jButtonReiniciarEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReiniciarEliminarActionPerformed
         jTextAreaEliminar.setText("");
     }//GEN-LAST:event_jButtonReiniciarEliminarActionPerformed
